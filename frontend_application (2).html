@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="th" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>กุดแฮดไดโนรัน 2026</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body { font-family: 'Prompt', sans-serif; background-color: #f0f9ff; }
+        .bg-pattern {
+            background-color: #f0fdf4;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(14, 165, 233, 0.12) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(34, 197, 94, 0.12) 0px, transparent 50%),
+                url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%230284c7' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4H-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        .glass-card { background: rgba(255, 255, 255, 0.96); backdrop-filter: blur(10px); }
+        .step-hidden { display: none !important; opacity: 0; transition: opacity 0.3s; }
+        .step-active { display: block; opacity: 1; transition: opacity 0.3s; }
+        .stepper-btn { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: #e2e8f0; color: #475569; font-weight: bold; cursor: pointer; user-select: none; transition: all 0.2s; }
+        .stepper-btn:hover { background: #cbd5e1; }
+        .stepper-btn:active { transform: scale(0.9); }
+        .stepper-input { width: 40px; text-align: center; font-weight: bold; background: transparent; border: none; outline: none; }
+        .stepper-input::-webkit-outer-spin-button, .stepper-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+        #toast-container { position: fixed; top: 20px; right: 20px; z-index: 9999; display: flex; flex-direction: column; gap: 10px; }
+        .toast { min-width: 260px; background: white; border-radius: 12px; padding: 16px; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.15); display: flex; align-items: center; gap: 12px; transform: translateX(120%); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .toast.show { transform: translateX(0); }
+        .loader-overlay { position: fixed; inset: 0; background: rgba(255,255,255,0.85); z-index: 9998; display: flex; flex-direction: column; justify-content: center; align-items: center; backdrop-filter: blur(4px); }
+        .spinner { border: 4px solid #e2e8f0; border-top: 4px solid #2563eb; border-radius: 50%; width: 42px; height: 42px; animation: spin 1s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        @keyframes floatSlow { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-6px); } }
+        .dino-float { animation: floatSlow 3.5s ease-in-out infinite; }
+        .shirt-card:hover { transform: translateY(-4px); }
+    </style>
+</head>
+<body class="bg-pattern antialiased text-slate-800 min-h-screen flex flex-col">
+
+    <header class="bg-gradient-to-r from-sky-700 via-blue-700 to-emerald-700 text-white sticky top-0 z-40 shadow-lg border-b-4 border-yellow-400">
+        <div class="max-w-5xl mx-auto px-4 py-2.5 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="relative group">
+                    <div id="svg-default-logo" class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-white p-0.5 shadow-md flex items-center justify-center">
+                        <svg viewBox="0 0 120 120" class="w-full h-full">
+                            <circle cx="60" cy="60" r="56" fill="#0284c7" stroke="#ffffff" stroke-width="2"/>
+                            <circle cx="60" cy="60" r="44" fill="#ffffff"/>
+                            <defs>
+                                <linearGradient id="crossGrad" x1="0" y1="0" x2="1" y2="1">
+                                    <stop offset="0%" stop-color="#38bdf8"/>
+                                    <stop offset="100%" stop-color="#0284c7"/>
+                                </linearGradient>
+                                <path id="textCircleTop" d="M 13,60 A 47,47 0 1,1 107,60" />
+                                <path id="textCircleBottom" d="M 107,60 A 47,47 0 1,1 13,60" />
+                            </defs>
+                            <path d="M46,24 H74 V46 H96 V74 H74 V96 H46 V74 H24 V46 H46 Z" fill="url(#crossGrad)" rx="8"/>
+                            <path d="M60,27 L63,45 L67,62 L72,88 H48 L53,62 L57,45 Z" fill="#ffffff"/>
+                            <rect x="52" y="65" width="16" height="4" fill="#0284c7"/>
+                            <rect x="50" y="75" width="20" height="6" fill="#0284c7"/>
+                            <text fill="#ffffff" font-size="7.2" font-weight="bold" text-anchor="middle">
+                                <textPath href="#textCircleTop" startOffset="50%">รพ.สต.บ้านกุดแฮดสามัคคี</textPath>
+                            </text>
+                            <text fill="#e0f2fe" font-size="6.8" font-weight="bold" text-anchor="middle">
+                                <textPath href="#textCircleBottom" startOffset="50%">องค์การบริหารส่วนจังหวัดสกลนคร</textPath>
+                            </text>
+                        </svg>
+                    </div>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <h1 class="text-lg md:text-2xl font-extrabold leading-tight tracking-tight drop-shadow" id="ui-event-name">กุดแฮดไดโนรัน 2026</h1>
+                        <span class="hidden sm:inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold bg-yellow-400 text-slate-900 shadow-sm">🦖 DINO RUN</span>
+                    </div>
+                    <p class="text-xs md:text-sm text-sky-100 font-medium" id="ui-org-name">รพ.สต.บ้านกุดแฮดสามัคคี • อบจ.สกลนคร</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-2 md:gap-3 font-semibold text-xs md:text-sm">
+                <a href="tel:042707439" class="hidden lg:flex items-center gap-1.5 bg-emerald-500/30 hover:bg-emerald-500/50 border border-emerald-300/40 text-white px-3 py-2 rounded-xl transition">
+                    <i class="fa-solid fa-phone-volume text-yellow-300 animate-pulse"></i>
+                    <span>สอบถาม: <strong id="ui-header-phone">042707439</strong></span>
+                </a>
+                <button onclick="switchTab('order')" class="bg-white/15 hover:bg-yellow-400 hover:text-slate-900 transition px-3 py-2 rounded-xl flex items-center gap-1.5 shadow-sm">
+                    <i class="fa-solid fa-shirt"></i> <span>สั่งจองเสื้อ</span>
+                </button>
+                <button onclick="switchTab('payment')" class="bg-white/15 hover:bg-yellow-400 hover:text-slate-900 transition px-3 py-2 rounded-xl flex items-center gap-1.5 shadow-sm">
+                    <i class="fa-solid fa-file-invoice-dollar"></i> <span>แจ้งชำระเงิน</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div id="loader" class="loader-overlay" style="display: none;">
+        <div class="spinner mb-4"></div>
+        <p class="text-blue-700 font-semibold animate-pulse" id="loader-text">กำลังบันทึกข้อมูล...</p>
+    </div>
+
+    <div id="toast-container"></div>
+
+    <main class="flex-grow max-w-5xl mx-auto w-full p-4 md:p-6 lg:p-8">
+        
+        <section id="section-order" class="step-active">
+            
+            <div class="relative rounded-3xl overflow-hidden shadow-xl mb-6 border-2 border-white bg-gradient-to-br from-sky-500 via-sky-400 to-emerald-500 text-white">
+                <svg class="absolute bottom-0 left-0 w-full h-32 md:h-44 opacity-35 pointer-events-none" viewBox="0 0 1200 220" preserveAspectRatio="none">
+                    <path d="M0,160 L180,60 L340,140 L540,40 L760,150 L980,50 L1200,130 L1200,220 L0,220 Z" fill="#0369a1"/>
+                    <path d="M0,180 L250,90 L480,170 L720,80 L950,160 L1200,95 L1200,220 L0,220 Z" fill="#15803d"/>
+                    <path d="M520,220 Q600,140 690,110 L730,110 Q670,150 750,220 Z" fill="#334155"/>
+                </svg>
+
+                <div class="relative z-10 p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6">
+                    <div class="text-center md:text-left max-w-xl">
+                        <div class="inline-flex flex-wrap items-center justify-center md:justify-start gap-2 mb-3">
+                            <span class="px-3.5 py-1 bg-yellow-400 text-slate-900 text-xs md:text-sm font-extrabold rounded-full shadow">
+                                <i class="fa-solid fa-calendar-days mr-1"></i> วันวิ่ง: 28 พ.ย. 2569
+                            </span>
+                            <span class="px-3.5 py-1 bg-emerald-700 text-white text-xs md:text-sm font-extrabold rounded-full shadow">
+                                <i class="fa-solid fa-route mr-1"></i> เส้นทาง: กุดแฮด - ดานหลวง - ดินจี่
+                            </span>
+                            <span class="px-3.5 py-1 bg-red-600 text-white text-xs md:text-sm font-extrabold rounded-full shadow animate-pulse">
+                                <i class="fa-solid fa-clock mr-1"></i> สั่งจองได้ตั้งแต่บัดนี้ถึง 10 พ.ย. 2569
+                            </span>
+                        </div>
+                        <div class="inline-flex items-center gap-2 px-3.5 py-1 bg-blue-900/80 text-yellow-300 text-xs md:text-sm font-bold rounded-full shadow mb-3 border border-yellow-400/40">
+                            <i class="fa-solid fa-location-dot"></i> จุดรวมพล: ดานแก่นจันทร์ เวลา 05.00 น.
+                        </div>
+                        <h2 class="text-2xl sm:text-4xl font-extrabold tracking-tight drop-shadow-md leading-tight">
+                            ร่วมวิ่งสร้างสุขภาพดี <span class="text-yellow-300">DINO RUN 2026</span>
+                        </h2>
+                        <p class="text-sky-50 mt-2 text-sm md:text-base font-medium">
+                            จัดโดย โรงพยาบาลส่งเสริมสุขภาพตำบลบ้านกุดแฮดสามัคคี สังกัดองค์การบริหารส่วนจังหวัดสกลนคร
+                        </p>
+                    </div>
+
+                    <div class="dino-float flex items-center gap-3 bg-white/15 backdrop-blur-md p-3.5 rounded-2xl border border-white/30 shadow-lg">
+                        <svg viewBox="0 0 140 140" class="w-20 h-20 md:w-24 md:h-24 drop-shadow-md">
+                            <circle cx="70" cy="70" r="64" fill="#fef08a" opacity="0.25"/>
+                            <path d="M22,88 Q10,75 18,62 Q28,74 42,76 Z" fill="#16a34a"/>
+                            <ellipse cx="62" cy="82" rx="24" ry="26" fill="#0284c7"/>
+                            <text x="62" y="86" font-size="9" font-weight="900" fill="#facc15" text-anchor="middle">2026</text>
+                            <path d="M55,58 C55,34 85,26 105,36 C115,42 114,55 102,58 L82,58 L98,64 C95,70 80,70 72,66 Z" fill="#22c55e"/>
+                            <polygon points="52,42 58,32 63,40" fill="#f97316"/>
+                            <polygon points="45,54 50,44 56,52" fill="#f97316"/>
+                            <circle cx="88" cy="44" r="4.5" fill="#ffffff"/>
+                            <circle cx="90" cy="44" r="2.2" fill="#0f172a"/>
+                            <path d="M62,38 L98,35 L96,40 L60,43 Z" fill="#ef4444"/>
+                            <rect x="40" y="118" width="18" height="7" rx="3" fill="#f97316"/>
+                        </svg>
+                        <div class="pr-2">
+                            <div class="text-xs uppercase tracking-wider text-yellow-300 font-bold">เสื้อที่ระลึก</div>
+                            <div class="text-lg font-extrabold leading-tight">คอกลม 150.-</div>
+                            <div class="text-lg font-extrabold leading-tight text-yellow-300">คอปก 260.-</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-8">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4 px-1">
+                    <h3 class="text-xl font-extrabold text-slate-800 flex items-center gap-2">
+                        <span class="w-8 h-8 rounded-lg bg-blue-600 text-white flex items-center justify-center text-sm shadow"><i class="fa-solid fa-shirt"></i></span>
+                        แบบเสื้อวิ่งกุดแฮดไดโนรัน 2026 (เปิดจองถึง 10 พ.ย. 2569)
+                    </h3>
+                    <span class="text-xs text-slate-500"><i class="fa-solid fa-circle-info mr-1"></i>วันที่วิ่ง: 28 พ.ย. 2569 • เส้นทาง: กุดแฮด - ดานหลวง - ดินจี่</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Crew Neck Shirt Card -->
+                    <div class="shirt-card glass-card rounded-3xl p-5 border-2 border-emerald-200 shadow-lg transition duration-300 flex flex-col justify-between relative overflow-hidden">
+                        <div class="absolute top-3 right-3 bg-emerald-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow z-10">
+                            ยอดนิยม • ใส่สบาย
+                        </div>
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="flex items-center gap-2">
+                                    <span class="w-3 h-3 rounded-full bg-emerald-500"></span>
+                                    <h4 class="text-lg font-extrabold text-slate-800">1. เสื้อวิ่งคอกลม (Crew Neck)</h4>
+                                </div>
+                            </div>
+
+                            <div class="bg-gradient-to-b from-slate-900 to-slate-800 rounded-2xl p-2 relative min-h-[300px] flex items-center justify-center overflow-hidden border border-slate-700 shadow-inner">
+                                <img id="img-crew-shirt" class="w-full h-full max-h-[340px] object-contain rounded-xl shadow" alt="เสื้อคอกลม 150 บาท" src="https://lh3.googleusercontent.com/d/1TJ9yUMYgLfCOVsf-1fIMOhfm60LhVkLR">
+                            </div>
+                        </div>
+
+                        <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                            <span class="text-xs text-slate-500">ผ้าไมโครสปอร์ต ระบายอากาศดีเยี่ยม</span>
+                            <div class="text-right">
+                                <span class="text-xs text-slate-400">ราคาตัวละ</span>
+                                <div class="text-2xl font-extrabold text-emerald-600"><span id="card-price-crew">150</span> ฿</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Polo Shirt Card -->
+                    <div class="shirt-card glass-card rounded-3xl p-5 border-2 border-blue-200 shadow-lg transition duration-300 flex flex-col justify-between relative overflow-hidden">
+                        <div class="absolute top-3 right-3 bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow z-10">
+                            พรีเมียม • มีกระเป๋าหน้าอก
+                        </div>
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="flex items-center gap-2">
+                                    <span class="w-3 h-3 rounded-full bg-blue-600"></span>
+                                    <h4 class="text-lg font-extrabold text-slate-800">2. เสื้อวิ่งคอปกโปโล (Polo Shirt)</h4>
+                                </div>
+                            </div>
+
+                            <div class="bg-gradient-to-b from-slate-900 to-slate-800 rounded-2xl p-2 relative min-h-[300px] flex items-center justify-center overflow-hidden border border-slate-700 shadow-inner">
+                                <img id="img-polo-shirt" class="w-full h-full max-h-[340px] object-contain rounded-xl shadow" alt="เสื้อคอปก 260 บาท" src="https://lh3.googleusercontent.com/d/1k6Z8DPhVO1FMHS68SnxH9FUQi91_v2NS">
+                            </div>
+                        </div>
+
+                        <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                            <span class="text-xs text-slate-500">ทรงสุภาพ มีปกและกระเป๋าหน้าอก</span>
+                            <div class="text-right">
+                                <span class="text-xs text-slate-400">ราคาตัวละ</span>
+                                <div class="text-2xl font-extrabold text-blue-600"><span id="card-price-polo">260</span> ฿</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-card rounded-3xl shadow-xl overflow-hidden border border-white">
+                <div class="bg-gradient-to-r from-blue-50 via-sky-50 to-emerald-50 p-6 border-b border-slate-200 text-center">
+                    <h2 class="text-2xl md:text-3xl font-extrabold text-blue-900 flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-clipboard-list text-blue-600"></i> แบบฟอร์มสั่งจองเสื้อวิ่ง
+                    </h2>
+                    <p class="text-slate-500 mt-1 text-sm">เปิดจองตั้งแต่วันนี้ถึง 10 พ.ย. 2569 • วันวิ่ง: 28 พ.ย. 2569 • จุดรวมพล: ดานแก่นจันทร์ 05.00 น.</p>
+                </div>
+
+                <form id="orderForm" onsubmit="handleOrderSubmit(event)" class="p-6 md:p-8">
+                    <h3 class="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2"><i class="fa-solid fa-address-card text-blue-500"></i> ข้อมูลผู้สั่งจอง</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-8">
+                        <div>
+                            <label class="block text-sm font-medium text-slate-600 mb-1">ชื่อ-นามสกุล <span class="text-red-500">*</span></label>
+                            <input type="text" id="custName" required placeholder="ระบุชื่อ-นามสกุล" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-500 outline-none bg-slate-50 focus:bg-white transition">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-600 mb-1">เบอร์โทรศัพท์ <span class="text-red-500">*</span></label>
+                            <input type="tel" id="custPhone" required pattern="[0-9]{9,10}" placeholder="08xxxxxxxx" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-500 outline-none bg-slate-50 focus:bg-white transition">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-600 mb-1">หน่วยงาน / ทีม</label>
+                            <input type="text" id="custOrg" placeholder="ไม่บังคับ" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-500 outline-none bg-slate-50 focus:bg-white transition">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-600 mb-1">อีเมล</label>
+                            <input type="email" id="custEmail" placeholder="ไม่บังคับ" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-500 outline-none bg-slate-50 focus:bg-white transition">
+                        </div>
+                    </div>
+
+                    <h3 class="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2"><i class="fa-solid fa-shirt text-blue-500"></i> เลือกไซซ์และจำนวน</h3>
+                    
+                    <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden mb-6 shadow-sm">
+                        <div class="bg-blue-800 text-white px-4 py-3 font-semibold flex justify-between items-center">
+                            <span>ตารางไซซ์เสื้อผู้ใหญ่ (นิ้ว)</span>
+                            <span class="text-xs bg-blue-700 px-2 py-1 rounded-lg">รอบอก / ความยาว</span>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-center text-sm">
+                                <thead class="bg-slate-50 border-b border-slate-200 text-slate-600">
+                                    <tr>
+                                        <th class="py-3 px-2">SIZE</th>
+                                        <th class="py-3 px-2 border-r">สัดส่วน</th>
+                                        <th class="py-3 px-2 font-bold text-green-600 bg-green-50">คอกลม <span id="ui-price-crew">150</span>฿</th>
+                                        <th class="py-3 px-2 font-bold text-blue-600 bg-blue-50">คอปก <span id="ui-price-polo">260</span>฿</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="adultTableBody" class="divide-y divide-slate-100"></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden mb-8 shadow-sm">
+                        <div class="bg-indigo-600 text-white px-4 py-3 font-semibold">ตารางไซซ์เสื้อเด็ก (นิ้ว)</div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-center text-sm">
+                                <tbody id="childTableBody" class="divide-y divide-slate-100"></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-900 rounded-2xl p-6 text-white shadow-lg mb-6 flex justify-between items-center">
+                        <div>
+                            <p class="text-slate-300 text-sm">รวมจำนวนเสื้อ</p>
+                            <p class="text-2xl font-bold"><span id="ui-total-qty" class="text-yellow-400">0</span> ตัว</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-slate-300 text-sm">ยอดชำระสุทธิ</p>
+                            <p class="text-4xl font-extrabold text-green-400"><span id="ui-total-amount">0</span> ฿</p>
+                        </div>
+                    </div>
+
+                    <button type="submit" id="btnSubmitOrder" class="w-full bg-gradient-to-r from-blue-600 to-emerald-600 hover:from-blue-700 hover:to-emerald-700 text-white font-bold text-lg py-4 rounded-2xl shadow-xl transition flex justify-center items-center gap-2">
+                        <i class="fa-solid fa-cart-check"></i> ยืนยันการสั่งจองเสื้อ (เปิดจองถึง 10 พ.ย. 69)
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <section id="section-order-success" class="step-hidden max-w-2xl mx-auto">
+            <div class="glass-card rounded-3xl shadow-xl p-8 text-center border border-white">
+                <div class="w-20 h-20 bg-green-100 text-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fa-solid fa-check text-4xl"></i>
+                </div>
+                <h2 class="text-2xl font-extrabold text-slate-800 mb-1">สั่งจองเสื้อสำเร็จ!</h2>
+                <p class="text-xs text-slate-500 mb-4">กรุณาจดจำหรือแคปหน้าจอรหัสคำสั่งจองเพื่อใช้แจ้งชำระเงิน</p>
+                <div class="bg-slate-100 py-4 px-6 rounded-2xl inline-block text-2xl font-mono font-bold text-blue-700 mb-6" id="display-order-id">ORD-XXXX</div>
+                
+                <div class="bg-blue-50 rounded-2xl p-6 text-left mb-6 border border-blue-100 space-y-2 text-sm text-slate-700">
+                    <p class="flex justify-between"><span>ธนาคาร:</span> <span id="info-bank-name" class="font-semibold">ธนาคารเพื่อการเกษตรและสหกรณ์การเกษตร (ธ.ก.ส.)</span></p>
+                    <p class="flex justify-between"><span>ชื่อบัญชี:</span> <span id="info-account-name" class="font-semibold text-blue-700">ภาคินัย กุดตะแสง (หมอเอฟ)</span></p>
+                    <p class="flex justify-between"><span>เลขบัญชี:</span> <span id="info-account-num" class="font-mono font-bold">XXX-X-XXXXX-X</span></p>
+                    <p class="flex justify-between pt-2 border-t border-blue-200 text-base font-bold text-green-700"><span>ยอดโอน:</span> <span id="info-pay-amount">0</span> ฿</p>
+                </div>
+                <div class="flex flex-col sm:flex-row gap-3">
+                    <button type="button" onclick="goToPaymentFromOrder()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 rounded-xl shadow transition">
+                        แจ้งชำระเงินทันที
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section id="section-payment" class="step-hidden max-w-2xl mx-auto">
+            <div class="glass-card rounded-3xl shadow-xl overflow-hidden border border-white">
+                <div class="bg-indigo-50/50 p-6 border-b border-slate-200 text-center">
+                    <h2 class="text-2xl font-extrabold text-indigo-900">แจ้งชำระเงิน (สแกน QR Code หรือโอนเงิน)</h2>
+                    <p class="text-xs text-slate-500 mt-1">วันวิ่ง: 28 พ.ย. 2569 • เส้นทาง: กุดแฮด - ดานหลวง - ดินจี่ (จุดรวมพล: ดานแก่นจันทร์ 05.00 น.)</p>
+                </div>
+                
+                <div class="p-6 md:p-8 space-y-6">
+                    <div class="bg-gradient-to-b from-slate-900 to-slate-800 rounded-3xl p-6 text-center text-white shadow-xl border-2 border-emerald-500/50">
+                        <div class="inline-flex items-center gap-2 bg-emerald-600 text-white text-xs font-bold px-3 py-1 rounded-full mb-3 shadow">
+                            <i class="fa-solid fa-qrcode"></i> Thai QR Payment • PromptPay (ธ.ก.ส.)
+                        </div>
+                        <h4 class="text-lg font-bold text-yellow-300 mb-1">สแกนเพื่อชำระเงินค่าเสื้อวิ่ง</h4>
+                        <p class="text-xs text-slate-300 mb-3">โรงพยาบาลส่งเสริมสุขภาพตำบลบ้านกุดแฮดสามัคคี</p>
+
+                        <div class="bg-white p-3 rounded-2xl inline-block shadow-lg">
+                            <img id="qr-code-img" src="https://lh3.googleusercontent.com/d/1VwM7Z0nUMpzR4whC-YuZ3XA4_HtbbgyX" class="w-48 h-48 md:w-56 md:h-56 object-contain mx-auto rounded-xl" alt="QR Code ธ.ก.ส. พร้อมเพย์">
+                        </div>
+                        
+                        <div class="mt-3 bg-white/10 py-2.5 px-4 rounded-xl inline-block border border-white/20">
+                            <p class="text-xs text-slate-300">ชื่อบัญชีรับโอน</p>
+                            <p class="text-base md:text-lg font-extrabold text-yellow-300 tracking-wide">ภาคินัย กุดตะแสง (หมอเอฟ)</p>
+                        </div>
+
+                        <p class="text-xs text-emerald-400 font-semibold mt-3"><i class="fa-solid fa-shield-check mr-1"></i> รองรับโมบายแบงก์กิ้งทุกธนาคาร (ธ.ก.ส. พร้อมเพย์)</p>
+                    </div>
+
+                    <form id="paymentForm" onsubmit="handlePaymentSubmit(event)" class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-slate-600 mb-1">รหัสคำสั่งจอง <span class="text-red-500">*</span></label>
+                            <input type="text" id="payOrderId" required class="w-full px-4 py-3 rounded-xl border border-slate-300 font-mono uppercase bg-slate-50 focus:bg-white transition">
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-slate-600 mb-1">ยอดเงินที่โอน <span class="text-red-500">*</span></label>
+                                <input type="number" step="0.01" id="payAmount" required class="w-full px-4 py-3 rounded-xl border border-slate-300 bg-slate-50 focus:bg-white transition">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-slate-600 mb-1">ธนาคารที่โอนเข้า <span class="text-red-500">*</span></label>
+                                <select id="payBank" required class="w-full px-4 py-3 rounded-xl border border-slate-300 bg-slate-50 focus:bg-white transition">
+                                    <option value="" disabled selected>เลือกธนาคาร</option>
+                                    <option value="BAAC">ธ.ก.ส. (ธนาคารเพื่อการเกษตรและสหกรณ์การเกษตร)</option>
+                                    <option value="KBANK">กสิกรไทย</option>
+                                    <option value="SCB">ไทยพาณิชย์</option>
+                                    <option value="KTB">กรุงไทย</option>
+                                    <option value="PROMPTPAY">พร้อมเพย์</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-slate-600 mb-1">วันที่โอน <span class="text-red-500">*</span></label>
+                                <input type="date" id="payDate" required class="w-full px-4 py-3 rounded-xl border border-slate-300 bg-slate-50 focus:bg-white transition">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-slate-600 mb-1">เวลาที่โอน <span class="text-red-500">*</span></label>
+                                <input type="time" id="payTime" required class="w-full px-4 py-3 rounded-xl border border-slate-300 bg-slate-50 focus:bg-white transition">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-600 mb-2">แนบสลิปการโอนเงิน <span class="text-red-500">*</span></label>
+                            <input type="file" id="payFile" required accept=".jpg,.jpeg,.png" onchange="handleFileSelect(event)" class="w-full p-3 border border-slate-300 rounded-xl bg-slate-50">
+                        </div>
+                        <button type="submit" id="btnSubmitPayment" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 rounded-2xl shadow-xl transition">ยืนยันการแจ้งชำระเงิน</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <section id="section-payment-success" class="step-hidden max-w-2xl mx-auto">
+            <div class="glass-card rounded-3xl shadow-xl p-8 text-center border border-white">
+                <div class="w-20 h-20 bg-indigo-100 text-indigo-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i class="fa-solid fa-file-invoice-dollar text-4xl"></i>
+                </div>
+                <h2 class="text-2xl font-extrabold text-slate-800 mb-2">แจ้งชำระเงินสำเร็จ!</h2>
+                <div class="bg-slate-100 py-3 px-6 rounded-2xl inline-block text-xl font-mono font-bold text-indigo-700 mb-6" id="display-payment-id">PAY-XXXX</div>
+                <br>
+                <button type="button" onclick="switchTab('order')" class="bg-slate-800 text-white font-bold py-3 px-8 rounded-xl shadow transition">กลับหน้าหลัก</button>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="mt-auto py-8 text-center text-slate-600 text-sm px-4 border-t border-slate-200/80 bg-white/80">
+        <p class="font-extrabold text-slate-800 text-base">โรงพยาบาลส่งเสริมสุขภาพตำบลบ้านกุดแฮดสามัคคี (อบจ.สกลนคร)</p>
+        <p class="text-xs text-slate-500 mt-1">เปิดจองตั้งแต่วันนี้ถึง 10 พ.ย. 2569 • วันวิ่ง: 28 พ.ย. 2569 • เส้นทาง: กุดแฮด - ดานหลวง - ดินจี่ (จุดรวมพล: ดานแก่นจันทร์ 05.00 น.)</p>
+        <div class="mt-3 flex justify-center">
+            <a href="tel:042707439" class="inline-flex items-center gap-2 bg-blue-50 hover:bg-blue-100 text-blue-800 font-bold px-5 py-2.5 rounded-full border border-blue-200 shadow-sm transition">
+                <i class="fa-solid fa-phone-volume text-blue-600"></i>
+                <span>สอบถามรายละเอียด โทร: <span id="ui-contact" class="text-lg font-extrabold text-blue-700 underline">042707439</span></span>
+            </a>
+        </div>
+    </footer>
+
+    <script>
+        const DEPLOYED_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwffB6-UpHOcdaLXzXfTfTJCmYkDSz0jKvPhC1qZ7rdj8tIDgvENL02W_QUioLSq6LsLg/exec";
+
+        let configData = { unitPriceCrew: 150, unitPricePolo: 260 };
+        let selectedFile = null;
+
+        const adultSizes = [{s:'XS',c:34,l:25},{s:'S',c:36,l:26},{s:'M',c:38,l:27},{s:'L',c:40,l:28},{s:'XL',c:42,l:29},{s:'2XL',c:44,l:30},{s:'3XL',c:46,l:31},{s:'4XL',c:48,l:32},{s:'5XL',c:50,l:33}];
+        const childSizes = [{s:'S',c:26,l:17.5},{s:'M',c:28,l:18.5},{s:'L',c:30,l:19.5},{s:'XL',c:32,l:21},{s:'2XL',c:34,l:22}];
+
+        function callRealBackend(action, payload, onSuccess, onError) {
+            if (typeof google !== 'undefined' && google.script && google.script.run) {
+                const runner = google.script.run
+                    .withSuccessHandler(onSuccess)
+                    .withFailureHandler(err => onError(err));
+
+                if (action === 'getInitialData') runner.getInitialData();
+                else if (action === 'submitOrder') runner.submitOrder(payload);
+                else if (action === 'submitPayment') runner.submitPayment(payload);
+            } else {
+                if (action === 'getInitialData') {
+                    fetch(DEPLOYED_WEB_APP_URL + '?action=getInitialData', { method: 'GET' })
+                        .then(response => response.json())
+                        .then(res => {
+                            if (res.status === 'success') onSuccess(res.data);
+                            else onError({ message: res.message || 'เกิดข้อผิดพลาดจากเซิร์ฟเวอร์' });
+                        })
+                        .catch(err => onError({ message: err.message }));
+                    return;
+                }
+
+                fetch(DEPLOYED_WEB_APP_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify({ action: action, payload: payload })
+                })
+                .then(response => response.json())
+                .then(res => {
+                    if (res.status === 'success') onSuccess(res.data);
+                    else onError({ message: res.message || 'เกิดข้อผิดพลาดจากเซิร์ฟเวอร์' });
+                })
+                .catch(err => onError({ message: 'ไม่สามารถเชื่อมต่อระบบได้ (' + err.message + ')' }));
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderTables();
+            loadSystemConfig();
+        });
+
+        function loadSystemConfig() {
+            try {
+                const rawPreloaded = '<?!= typeof preloadedConfig !== "undefined" ? preloadedConfig : "" ?>';
+                if (rawPreloaded && rawPreloaded.indexOf('<?') === -1) {
+                    const serverPreloaded = JSON.parse(rawPreloaded);
+                    if (serverPreloaded && typeof serverPreloaded === 'object') {
+                        onConfigLoaded(serverPreloaded);
+                        try { localStorage.setItem('dinorun_config_cache', JSON.stringify(serverPreloaded)); } catch(e) {}
+                        return;
+                    }
+                }
+            } catch (e) {}
+
+            try {
+                const cached = localStorage.getItem('dinorun_config_cache');
+                if (cached) onConfigLoaded(JSON.parse(cached));
+            } catch (e) {}
+
+            callRealBackend('getInitialData', null, data => {
+                if (data) {
+                    try { localStorage.setItem('dinorun_config_cache', JSON.stringify(data)); } catch(e) {}
+                    onConfigLoaded(data);
+                }
+            }, err => {
+                hideLoader();
+            });
+        }
+
+        function renderTables() {
+            const row = (s, type) => `
+                <tr class="hover:bg-slate-50 transition">
+                    <td class="py-2 px-1 font-bold">${s.s}</td>
+                    <td class="py-2 px-1 text-slate-500 border-r">${s.c}" / ${s.l}"</td>
+                    <td class="py-2 px-1 bg-green-50/50"><div class="flex items-center justify-center gap-1"><button type="button" class="stepper-btn" onclick="updateQty('${type}-crew-${s.s}', -1)">-</button><input type="number" id="${type}-crew-${s.s}" value="0" min="0" class="stepper-input text-green-700" readonly><button type="button" class="stepper-btn" onclick="updateQty('${type}-crew-${s.s}', 1)">+</button></div></td>
+                    <td class="py-2 px-1 bg-blue-50/50"><div class="flex items-center justify-center gap-1"><button type="button" class="stepper-btn" onclick="updateQty('${type}-polo-${s.s}', -1)">-</button><input type="number" id="${type}-polo-${s.s}" value="0" min="0" class="stepper-input text-blue-700" readonly><button type="button" class="stepper-btn" onclick="updateQty('${type}-polo-${s.s}', 1)">+</button></div></td>
+                </tr>`;
+            document.getElementById('adultTableBody').innerHTML = adultSizes.map(s => row(s, 'adult')).join('');
+            document.getElementById('childTableBody').innerHTML = childSizes.map(s => row(s, 'child')).join('');
+        }
+
+        function updateQty(id, change) {
+            const el = document.getElementById(id);
+            let val = parseInt(el.value) + change;
+            if(val < 0) val = 0;
+            el.value = val;
+            calculateTotal();
+        }
+
+        function calculateTotal() {
+            let qty = 0, amt = 0;
+            const calc = (sizes, type) => {
+                sizes.forEach(s => {
+                    let c = parseInt(document.getElementById(`${type}-crew-${s.s}`).value) || 0;
+                    let p = parseInt(document.getElementById(`${type}-polo-${s.s}`).value) || 0;
+                    qty += (c + p);
+                    amt += (c * configData.unitPriceCrew) + (p * configData.unitPricePolo);
+                });
+            };
+            calc(adultSizes, 'adult');
+            calc(childSizes, 'child');
+            document.getElementById('ui-total-qty').textContent = qty;
+            document.getElementById('ui-total-amount').textContent = amt.toLocaleString();
+        }
+
+        function onConfigLoaded(data) {
+            if (!data) return;
+            configData = data;
+            document.getElementById('ui-event-name').textContent = data.eventName;
+            document.getElementById('ui-org-name').textContent = data.organizerName;
+            document.getElementById('ui-price-crew').textContent = data.unitPriceCrew;
+            document.getElementById('ui-price-polo').textContent = data.unitPricePolo;
+            document.getElementById('card-price-crew').textContent = data.unitPriceCrew;
+            document.getElementById('card-price-polo').textContent = data.unitPricePolo;
+            document.getElementById('info-bank-name').textContent = data.bankName || 'ธนาคารเพื่อการเกษตรและสหกรณ์การเกษตร (ธ.ก.ส.)';
+            document.getElementById('info-account-num').textContent = data.bankAccountNumber;
+            
+            const phone = '042707439';
+            document.getElementById('ui-contact').textContent = phone;
+            document.getElementById('ui-header-phone').textContent = phone;
+
+            hideLoader();
+        }
+
+        function handleOrderSubmit(e) {
+            e.preventDefault();
+            const items = [];
+            const gather = (sizes, cat) => {
+                sizes.forEach(s => {
+                    let c = parseInt(document.getElementById(`${cat}-crew-${s.s}`).value) || 0;
+                    let p = parseInt(document.getElementById(`${cat}-polo-${s.s}`).value) || 0;
+                    if(c > 0) items.push({ category: cat, type: 'crew', size: s.s, qty: c });
+                    if(p > 0) items.push({ category: cat, type: 'polo', size: s.s, qty: p });
+                });
+            };
+            gather(adultSizes, 'adult');
+            gather(childSizes, 'child');
+
+            if(items.length === 0) { showToast('warning', 'กรุณาเลือกเสื้ออย่างน้อย 1 ตัว'); return; }
+
+            showLoader('กำลังบันทึกคำสั่งจอง...');
+            const payload = {
+                name: document.getElementById('custName').value.trim(),
+                phone: document.getElementById('custPhone').value.trim(),
+                email: document.getElementById('custEmail').value.trim(),
+                organization: document.getElementById('custOrg').value.trim(),
+                items: items
+            };
+
+            callRealBackend('submitOrder', payload, res => {
+                hideLoader();
+                document.getElementById('display-order-id').textContent = res.orderId;
+                document.getElementById('info-pay-amount').textContent = res.amount.toLocaleString();
+                
+                resetPaymentForm();
+                document.getElementById('payOrderId').value = res.orderId;
+                document.getElementById('payAmount').value = res.amount;
+                
+                document.getElementById('orderForm').reset();
+                renderTables();
+                calculateTotal();
+
+                switchTab('order-success');
+                showToast('success', 'บันทึกคำสั่งจองสำเร็จ!');
+            }, err => {
+                hideLoader();
+                showToast('error', err.message);
+            });
+        }
+
+        function resetPaymentForm() {
+            const form = document.getElementById('paymentForm');
+            if (form) form.reset();
+            const fileInput = document.getElementById('payFile');
+            if (fileInput) fileInput.value = '';
+            selectedFile = null;
+        }
+
+        function goToPaymentFromOrder() {
+            const orderId = document.getElementById('display-order-id').textContent;
+            const rawAmt = document.getElementById('info-pay-amount').textContent.replace(/,/g, '');
+            resetPaymentForm();
+            document.getElementById('payOrderId').value = orderId;
+            document.getElementById('payAmount').value = rawAmt;
+            switchTab('payment');
+        }
+
+        function handleFileSelect(e) {
+            const file = e.target.files[0];
+            if(!file) { selectedFile = null; return; }
+            const reader = new FileReader();
+            reader.onload = evt => {
+                selectedFile = { filename: file.name, mimeType: file.type, bytes: evt.target.result.split(',')[1] };
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function handlePaymentSubmit(e) {
+            e.preventDefault();
+            const fileInput = document.getElementById('payFile');
+            if(!selectedFile || !fileInput.files || fileInput.files.length === 0) { 
+                showToast('warning', 'กรุณาแนบสลิปโอนเงิน'); 
+                return; 
+            }
+
+            showLoader('กำลังอัปโหลดหลักฐานการโอนเงิน...');
+            const payload = {
+                orderId: document.getElementById('payOrderId').value.trim().toUpperCase(),
+                amount: document.getElementById('payAmount').value,
+                bank: document.getElementById('payBank').value,
+                transferDate: document.getElementById('payDate').value,
+                transferTime: document.getElementById('payTime').value,
+                file: selectedFile
+            };
+
+            callRealBackend('submitPayment', payload, res => {
+                hideLoader();
+                document.getElementById('display-payment-id').textContent = res.paymentId;
+                resetPaymentForm();
+                switchTab('payment-success');
+                showToast('success', 'แจ้งชำระเงินสำเร็จ!');
+            }, err => {
+                hideLoader();
+                showToast('error', err.message);
+            });
+        }
+
+        function switchTab(id) {
+            if (id === 'payment') {
+                const fileInput = document.getElementById('payFile');
+                if (fileInput) fileInput.value = '';
+                selectedFile = null;
+                document.getElementById('payDate').value = '';
+                document.getElementById('payTime').value = '';
+                document.getElementById('payBank').selectedIndex = 0;
+            }
+            ['section-order', 'section-order-success', 'section-payment', 'section-payment-success'].forEach(s => {
+                document.getElementById(s).classList.remove('step-active');
+                document.getElementById(s).classList.add('step-hidden');
+            });
+            document.getElementById('section-' + id).classList.remove('step-hidden');
+            setTimeout(() => document.getElementById('section-' + id).classList.add('step-active'), 10);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function showLoader(msg) {
+            if (msg) document.getElementById('loader-text').textContent = msg;
+            document.getElementById('loader').style.display = 'flex';
+        }
+        function hideLoader() { document.getElementById('loader').style.display = 'none'; }
+        function showToast(type, msg) {
+            const c = document.getElementById('toast-container');
+            const t = document.createElement('div');
+            t.className = 'toast';
+            const icon = type === 'error' ? 'fa-circle-xmark text-red-500' : (type === 'warning' ? 'fa-triangle-exclamation text-amber-500' : 'fa-circle-check text-emerald-500');
+            t.innerHTML = `<i class="fa-solid ${icon} text-xl"></i> <span class="text-sm font-medium">${msg}</span>`;
+            c.appendChild(t);
+            setTimeout(() => t.classList.add('show'), 10);
+            setTimeout(() => { t.classList.remove('show'); setTimeout(() => t.remove(), 4500); }, 4500);
+        }
+    </script>
+</body>
+</html>
